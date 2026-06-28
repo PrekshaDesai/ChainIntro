@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ChainIntro - A beautiful, beginner-friendly introduction to Web3, blockchain concepts, live prices, and interactive block simulator.">
+  <title>ChainIntro - Discover the Decentralized Future</title>
+  <!-- Load CSS rules -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Load theme parser in head to prevent styling flashes -->
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- ==========================================
+       FULL-VIEWPORT BTC COIN CANVAS
+       Fixed behind all content. pointer-events:none so clicks pass through.
+       Coins drift across the whole page — the canvas is NOT inside the hero,
+       it covers the entire viewport at z-index 0.
+       ========================================== -->
+  <canvas id="btc-canvas" aria-hidden="true" style="position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></canvas>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION BAR
+       ========================================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo" id="header-logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span>ChainIntro</span>
+      </a>
+      
+      <div class="nav-container">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li><a href="index.html" id="nav-home">Home</a></li>
+            <li><a href="concepts.html" id="nav-concepts">Concepts</a></li>
+            <li><a href="prices.html" id="nav-prices">Live Prices</a></li>
+            <li><a href="simulator.html" id="nav-simulator">Block Simulator</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Light / Dark Theme Switcher Button -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN CONTENT CONTAINER
+       ========================================== -->
+  <main>
+    <div class="container">
+      
+      <!-- HERO LANDING SECTION WITH GLOWING FLOATING BACKDROP ORBS -->
+      <div class="hero-container-rel">
+        <!-- Floating Animated Background Circles (Dribbble Glassmorphic style) -->
+        <div class="data-blocks-bg">
+          <div class="glow-orb orb-1"></div>
+          <div class="glow-orb orb-2"></div>
+          <div class="glow-orb orb-3"></div>
+          <div class="glow-orb orb-4"></div>
+        </div>
+
+        <section class="hero" id="hero-section" style="position: relative; z-index: 1;">
+          <!-- .text-safe-zone tells btc-background.js to fade coins that drift
+               near this text, keeping headings and paragraphs readable -->
+          <div class="text-safe-zone">
+            <span class="badge" id="hero-badge">Web3 for Beginners</span>
+            <h1 class="hero-title" id="hero-title">Discover the Foundations of the Decentralized Web</h1>
+            <p class="hero-desc" id="hero-description">
+              Welcome to the world of Web3. Learn how cryptography, peer-to-peer consensus, and immutable record-keeping are replacing old server monopolies to build a more transparent, secure, and user-owned internet.
+            </p>
+            <div class="hero-actions">
+              <a href="concepts.html" class="btn btn-primary" id="btn-hero-cta">Explore Core Concepts &rarr;</a>
+              <a href="simulator.html" class="btn btn-secondary" id="btn-hero-secondary">Try Block Simulator</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- FEATURES / BENEFITS SECTION -->
+      <section class="features-section reveal" id="features-section">
+        <div class="section-header">
+          <h2 class="section-title" id="features-title">Why Web3 Matters</h2>
+          <p class="section-subtitle" id="features-subtitle">The three pillar technologies driving the modern Web3 revolution.</p>
+        </div>
+        
+        <div class="grid-3" id="features-grid">
+          
+          <!-- Card 1: Decentralization -->
+          <div class="glass-card" id="feature-card-decentralization">
+            <div class="feature-icon-wrapper">
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <circle cx="12" cy="4" r="2"></circle>
+                <circle cx="4" cy="12" r="2"></circle>
+                <circle cx="12" cy="20" r="2"></circle>
+                <circle cx="20" cy="12" r="2"></circle>
+                <line x1="12" y1="6" x2="12" y2="9"></line>
+                <line x1="6" y1="12" x2="9" y2="12"></line>
+                <line x1="12" y1="15" x2="12" y2="18"></line>
+                <line x1="15" y1="12" x2="18" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="feature-title">True Decentralization</h3>
+            <p class="feature-text">No single corporate entity or server holds the keys. Data is distributed across a worldwide network of independent nodes, avoiding single points of failure.</p>
+          </div>
+
+          <!-- Card 2: Cryptographic Security -->
+          <div class="glass-card" id="feature-card-security">
+            <div class="feature-icon-wrapper">
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
+            <h3 class="feature-title">Cryptographic Trust</h3>
+            <p class="feature-text">Security is guaranteed by mathematics rather than human trust. Every transaction is digitally signed, verified, and locked in place using advanced encryption.</p>
+          </div>
+
+          <!-- Card 3: User Ownership -->
+          <div class="glass-card" id="feature-card-ownership">
+            <div class="feature-icon-wrapper">
+              <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2" fill="none"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+                <circle cx="6" cy="15" r="1.5"></circle>
+              </svg>
+            </div>
+            <h3 class="feature-title">User Ownership</h3>
+            <p class="feature-text">Web3 gives power back to users. Through private keys, tokens, and digital wallets, you own your identity, assets, and data instead of renting them from tech giants.</p>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       FOOTER SECTION (Placeholders Included)
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <nav aria-label="Footer Navigation">
+        <ul class="footer-nav">
+          <li><a href="index.html" id="footer-nav-home">Home</a></li>
+          <li><a href="concepts.html" id="footer-nav-concepts">Concepts</a></li>
+          <li><a href="prices.html" id="footer-nav-prices">Live Prices</a></li>
+          <li><a href="simulator.html" id="footer-nav-simulator">Block Simulator</a></li>
+        </ul>
+      </nav>
+      <div class="footer-credits">
+        <p>&copy; 2026 ChainIntro Web3 Guide. Crafted for learners.</p>
+        <p>
+          Developer: <strong>[YOUR NAME]</strong> | 
+          Batch: <strong>[YOUR BATCH NAME]</strong> | 
+          GitHub: <a href="[YOUR GITHUB URL]" target="_blank" rel="noopener noreferrer" id="footer-github-link">Profile Link</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Loaded Scripts -->
+  <script src="js/nav.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/btc-background.js"></script>
+</body>
+</html>

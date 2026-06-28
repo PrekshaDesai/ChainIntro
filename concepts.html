@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ChainIntro Concepts - Learn key Web3 concepts side by side, including Web2 vs Web3, Bitcoin vs Ethereum, Public vs Private Keys, and Blockchain vs Databases.">
+  <title>ChainIntro - Core Web3 Concepts</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION BAR
+       ========================================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo" id="header-logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span>ChainIntro</span>
+      </a>
+      
+      <div class="nav-container">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li><a href="index.html" id="nav-home">Home</a></li>
+            <li><a href="concepts.html" id="nav-concepts">Concepts</a></li>
+            <li><a href="prices.html" id="nav-prices">Live Prices</a></li>
+            <li><a href="simulator.html" id="nav-simulator">Block Simulator</a></li>
+          </ul>
+        </nav>
+        
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN CONTENT
+       ========================================== -->
+  <main>
+    <div class="container">
+      
+      <section class="section-header">
+        <span class="badge" id="concepts-badge">Educational Explainer</span>
+        <h1 class="section-title" id="concepts-title">Web3 Concepts Simplified</h1>
+        <p class="section-subtitle" id="concepts-subtitle">Compare fundamental blockchain ideas side-by-side to understand why they differ and how the technology is structured.</p>
+      </section>
+
+      <section class="concepts-container" id="concepts-list">
+
+        <!-- 1. Web2 vs Web3 -->
+        <div class="glass-card compare-card reveal" id="concept-web2-web3">
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge left">Web2</span>
+              <h3>Centralized Platform Control</h3>
+            </div>
+            <p class="compare-desc">
+              Web2 is the read-write web governed by centralized platforms (like Google, Amazon, or Meta). Users get "free" services in exchange for yielding control of their private behavioral data and content. Digital identities and profiles remain captive in corporate databases, subject to platform policies.
+            </p>
+          </div>
+
+          <div class="compare-divider"></div>
+
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge right">Web3</span>
+              <h3>Decentralized User Ownership</h3>
+            </div>
+            <p class="compare-desc">
+              Web3 is the read-write-own web powered by public blockchains. Users interact peer-to-peer using self-sovereign digital assets and wallets without middle-men. Instead of renting accounts from tech corporations, users own their data, domain names, and digital credentials directly on-chain.
+            </p>
+          </div>
+        </div>
+
+        <!-- 2. Ethereum vs Bitcoin -->
+        <div class="glass-card compare-card reveal" id="concept-btc-eth">
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge left">Bitcoin</span>
+              <h3>Decentralized Store of Value</h3>
+            </div>
+            <p class="compare-desc">
+              Bitcoin was created in 2009 as a peer-to-peer electronic cash system. Today, it acts primarily as "digital gold" — a highly secure, scarce store of value with a strict supply cap of 21 million coins. It operates on a simple, robust code layout designed specifically for secure transactional ledgers.
+            </p>
+          </div>
+
+          <div class="compare-divider"></div>
+
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge right">Ethereum</span>
+              <h3>Programmable World Computer</h3>
+            </div>
+            <p class="compare-desc">
+              Ethereum takes blockchain technology and adds a Turing-complete smart contract execution environment. It acts as a global computer where developers write automated, code-based protocols (dApps). It hosts decentralized finance (DeFi), gaming, organizational governance (DAOs), and NFTs.
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Public Key vs Private Key -->
+        <div class="glass-card compare-card reveal" id="concept-keys">
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge left">Public Key</span>
+              <h3>Your Wallet Mailing Address</h3>
+            </div>
+            <p class="compare-desc">
+              Your public key is a cryptographic sequence that defines your location on the blockchain. It behaves like an email address or a bank routing number — it is completely safe to share with anyone who wants to send you digital assets or audit your public ledger transactions.
+            </p>
+          </div>
+
+          <div class="compare-divider"></div>
+
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge right">Private Key</span>
+              <h3>Your Vault Password & Signature</h3>
+            </div>
+            <p class="compare-desc">
+              Your private key is a secret code that serves as your mathematical signature to unlock and authorize transfers. If a third party gains access to your private key, they can steal your entire wallet instantly. It must never be shared, as it is the final authority of account ownership.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. Blockchain vs Traditional Databases -->
+        <div class="glass-card compare-card reveal" id="concept-blockchain-db">
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge left">Database</span>
+              <h3>Centralized Admin & CRUD Operations</h3>
+            </div>
+            <p class="compare-desc">
+              Traditional databases are owned by one entity that appoints administrators. Admins possess Create, Read, Update, and Delete (CRUD) permissions over all records. This centralized structure is extremely fast and efficient, but it requires users to trust the hosting entity not to modify or delete logs.
+            </p>
+          </div>
+
+          <div class="compare-divider"></div>
+
+          <div class="compare-side">
+            <div class="compare-side-header">
+              <span class="compare-badge right">Blockchain</span>
+              <h3>Append-Only Immutable Ledger</h3>
+            </div>
+            <p class="compare-desc">
+              Blockchains are decentralized write-once, read-many ledgers maintained by a consensus of nodes. Once a block of transactions is cryptographically stamped and added to the chain, it becomes permanent and cannot be modified or deleted. This immutability builds trust without needing a central coordinator.
+            </p>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       FOOTER SECTION
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <nav aria-label="Footer Navigation">
+        <ul class="footer-nav">
+          <li><a href="index.html" id="footer-nav-home">Home</a></li>
+          <li><a href="concepts.html" id="footer-nav-concepts">Concepts</a></li>
+          <li><a href="prices.html" id="footer-nav-prices">Live Prices</a></li>
+          <li><a href="simulator.html" id="footer-nav-simulator">Block Simulator</a></li>
+        </ul>
+      </nav>
+      <div class="footer-credits">
+        <p>&copy; 2026 ChainIntro Web3 Guide. Crafted for learners.</p>
+        <p>
+          Developer: <strong>[YOUR NAME]</strong> | 
+          Batch: <strong>[YOUR BATCH NAME]</strong> | 
+          GitHub: <a href="[YOUR GITHUB URL]" target="_blank" rel="noopener noreferrer" id="footer-github-link">Profile Link</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

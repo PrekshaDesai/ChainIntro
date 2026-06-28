@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ChainIntro Block Simulator - Learn blockchain immutability in action. Mine blocks, recalculate SHA-256 hashes live, and see chain integrity break instantly.">
+  <title>ChainIntro - Block Chain Simulator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- ==========================================
+       FULL-VIEWPORT BTC COIN CANVAS
+       Fixed behind all page content. pointer-events:none so clicks pass through.
+       Coins drift across the entire viewport, fading near .text-safe-zone elements.
+       ========================================== -->
+  <canvas id="btc-canvas" aria-hidden="true" style="position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0;"></canvas>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION BAR
+       ========================================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo" id="header-logo">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <span>ChainIntro</span>
+      </a>
+      
+      <div class="nav-container">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li><a href="index.html" id="nav-home">Home</a></li>
+            <li><a href="concepts.html" id="nav-concepts">Concepts</a></li>
+            <li><a href="prices.html" id="nav-prices">Live Prices</a></li>
+            <li><a href="simulator.html" id="nav-simulator">Block Simulator</a></li>
+          </ul>
+        </nav>
+        
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Light/Dark Theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       MAIN CONTENT
+       ========================================== -->
+  <main>
+    <div class="container">
+      
+      <!-- PAGE HEADER -->
+      <section class="section-header">
+        <span class="badge" id="simulator-badge">Interactive Lab</span>
+        <h1 class="section-title" id="simulator-title">Block Mining Simulator</h1>
+        <p class="section-subtitle" id="simulator-subtitle">Explore how hashing secures blockchains. Edit data, increment nonces, mine blocks, and watch the chain break in real-time when data is tampered with.</p>
+      </section>
+
+      <!-- SIMULATOR WORKBENCH LAYOUT WITH HEXAGON DRIFTING BACKGROUND ORBS -->
+      <div class="hero-container-rel">
+        <!-- Drifting gradient hexagons representing block shapes -->
+        <div class="data-blocks-bg hex-grid">
+          <div class="hex-orb hex-1"></div>
+          <div class="hex-orb hex-2"></div>
+          <div class="hex-orb hex-3"></div>
+        </div>
+
+        <section class="simulator-layout" style="position: relative; z-index: 1;">
+          
+          <!-- BLOCK 1 (Genesis Block) -->
+          <!-- .text-safe-zone: coins fade near this panel so the hash/nonce text stays readable -->
+          <div class="glass-card block-card invalid text-safe-zone" id="block1-card">
+            
+            <div class="block-header">
+              <span class="block-number">Block #1 (Genesis)</span>
+              <div class="status-badge invalid" id="block1-status">
+                <span>❌ Block Invalid</span>
+              </div>
+            </div>
+
+            <form id="block1-form" onsubmit="event.preventDefault();" novalidate>
+              <div class="form-group">
+                <label for="block1-data">Block Data</label>
+                <textarea 
+                  id="block1-data" 
+                  rows="3" 
+                  placeholder="Enter some transactions or info (e.g. 'Alice sends Bob 5 BTC')"
+                  required
+                ></textarea>
+                <span class="error-message" id="block1-data-error">Data is required to validate the block.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="block1-nonce">Nonce (Number used once)</label>
+                <input 
+                  type="number" 
+                  id="block1-nonce" 
+                  value="0" 
+                  min="0"
+                  required
+                >
+                <span class="error-message" id="block1-nonce-error">Nonce must be a non-negative integer.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="block1-prev">Previous Hash</label>
+                <input 
+                  type="text" 
+                  id="block1-prev" 
+                  value="0000000000000000000000000000000000000000000000000000000000000000" 
+                  disabled
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Current SHA-256 Hash</label>
+                <div class="hash-display-box invalid" id="block1-hash-box">
+                  Calculating...
+                </div>
+              </div>
+
+              <div class="mining-status-text" id="block1-mining-status">Ready to mine.</div>
+
+              <button type="button" class="btn btn-primary" id="btn-mine-block1">
+                Mine Block #1
+              </button>
+            </form>
+            
+          </div>
+
+          <!-- CONNECTOR LINK -->
+          <div class="chain-connector">
+            <svg class="chain-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </div>
+
+          <!-- BLOCK 2 (Child Block) -->
+          <!-- .text-safe-zone: coins also fade near this panel -->
+          <div class="glass-card block-card invalid text-safe-zone" id="block2-card">
+            
+            <div class="block-header">
+              <span class="block-number">Block #2 (Linked)</span>
+              <div class="status-badge invalid" id="block2-status">
+                <span>❌ Block Invalid</span>
+              </div>
+            </div>
+
+            <form id="block2-form" onsubmit="event.preventDefault();" novalidate>
+              <div class="form-group">
+                <label for="block2-data">Block Data</label>
+                <textarea 
+                  id="block2-data" 
+                  rows="3" 
+                  placeholder="Enter next block transactions (e.g. 'Bob pays Charlie 2 BTC')"
+                  required
+                ></textarea>
+                <span class="error-message" id="block2-data-error">Data is required to validate the block.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="block2-nonce">Nonce (Number used once)</label>
+                <input 
+                  type="number" 
+                  id="block2-nonce" 
+                  value="0" 
+                  min="0"
+                  required
+                >
+                <span class="error-message" id="block2-nonce-error">Nonce must be a non-negative integer.</span>
+              </div>
+
+              <div class="form-group">
+                <label for="block2-prev">Previous Hash (Copied from Block #1)</label>
+                <input 
+                  type="text" 
+                  id="block2-prev" 
+                  value="Calculating..." 
+                  disabled
+                >
+              </div>
+
+              <div class="form-group">
+                <label>Current SHA-256 Hash</label>
+                <div class="hash-display-box invalid" id="block2-hash-box">
+                  Calculating...
+                </div>
+              </div>
+
+              <div class="mining-status-text" id="block2-mining-status">Ready to mine.</div>
+
+              <button type="button" class="btn btn-primary" id="btn-mine-block2">
+                Mine Block #2
+              </button>
+            </form>
+            
+          </div>
+
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       FOOTER SECTION
+       ========================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <nav aria-label="Footer Navigation">
+        <ul class="footer-nav">
+          <li><a href="index.html" id="footer-nav-home">Home</a></li>
+          <li><a href="concepts.html" id="footer-nav-concepts">Concepts</a></li>
+          <li><a href="prices.html" id="footer-nav-prices">Live Prices</a></li>
+          <li><a href="simulator.html" id="footer-nav-simulator">Block Simulator</a></li>
+        </ul>
+      </nav>
+      <div class="footer-credits">
+        <p>&copy; 2026 ChainIntro Web3 Guide. Crafted for learners.</p>
+        <p>
+          Developer: <strong>[YOUR NAME]</strong> | 
+          Batch: <strong>[YOUR BATCH NAME]</strong> | 
+          GitHub: <a href="[YOUR GITHUB URL]" target="_blank" rel="noopener noreferrer" id="footer-github-link">Profile Link</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/btc-background.js"></script>
+  <script src="js/simulator.js"></script>
+</body>
+</html>
