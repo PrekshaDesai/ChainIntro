@@ -1,74 +1,156 @@
-# ChainIntro - Web3 & Blockchain Educational Website
+# ChainIntro – Web3 & Blockchain Educational Website
 
-ChainIntro is a premium, production-quality static educational portal designed to introduce beginners to the fundamental concepts of Web3, live cryptocurrency markets, and block mechanics. 
+ChainIntro is an educational website that helps beginners understand the fundamentals of Web3, Blockchain, and Cryptocurrency through simple explanations and interactive demonstrations. The project combines learning resources with practical examples, making blockchain concepts easier to understand.
 
-Built using pure **HTML5**, **CSS3**, and **vanilla ES6+ JavaScript**, this project requires **no installation, no npm packages, and no compiler**. It can be executed instantly by opening the `index.html` file in any modern web browser.
+# Features
 
----
+* Responsive landing page
+* Web3 and Blockchain concept comparison page
+* Live cryptocurrency price dashboard using the CoinGecko API
+* Interactive blockchain mining simulator
+* SHA-256 hashing demonstration
+* Proof-of-Work simulation
+* Responsive design for desktop and mobile devices
+* Modern and clean user interface
 
-## 📂 File Structure
+# Project Structure
 
+ChainIntro/
+│
+├── index.html              # Home Page
+├── concepts.html           # Concepts Page
+├── prices.html             # Live Prices Page
+├── simulator.html          # Blockchain Simulator
+│
+├── css/
+│   └── style.css
+│
+└── js/
+    ├── nav.js
+    ├── prices.js
+    └── simulator.js
 ```
-/web3-edu-site
-  ├── index.html          (Page 1: Landing page detailing Web3 pillars)
-  ├── concepts.html       (Page 2: Educational side-by-side explainers)
-  ├── prices.html         (Page 3: Live CoinGecko ticker dashboard)
-  ├── simulator.html      (Page 4: Interactive block hashing workspace)
-  ├── /css
-  │     └── style.css     (Shared stylesheet: colors, typography, glassmorphism, responsive grid, animations)
-  └── /js
-        ├── nav.js        (Shared: window.location.pathname active highlighting & scroll observer)
-        ├── prices.js     (Page 3 logic: async/await CoinGecko fetches, search validation)
-        └── simulator.js  (Page 4 logic: Web Crypto API SHA-256 calculator, PoW mine, chain-breaking)
-```
 
----
+# Technologies Used
 
-## 🚀 Setup and How to Run
+* HTML5
+* CSS3
+* JavaScript (ES6)
+* Web Crypto API
+* CoinGecko API
+* Google Fonts
 
-1. **Clone or Download** this directory to your local filesystem.
-2. Navigate to the project root folder.
-3. Locate `index.html` and double-click the file to open it in your default web browser (such as Google Chrome, Firefox, Safari, or Microsoft Edge).
-4. *(Optional)* For the best experience, you can serve the directory using a simple static file server (e.g. `npx serve .` or VS Code Live Server extension), although opening the raw path (`file:///`) is fully supported.
-5. Make sure you are connected to the internet to load external Google Fonts ("Space Grotesk" & "Inter") and fetch market rates from the CoinGecko API on Page 3.
+# Website Pages
 
----
+## 1. Home
 
-## 🧠 Behind the Scenes: How It Works
+* Introduction to Web3 and Blockchain
+* Hero section
+* Feature section
+* Navigation bar
+* Footer
 
-This project is tailored for learners. Below are key technical mechanisms explained in detail:
+## 2. Concepts
 
-### 1. Active Navigation Highlighting (`nav.js`)
-To highlight the current page in the navbar without duplicating code or using server-side rendering, `nav.js` checks the browser's current address:
-* On page load, it queries `window.location.pathname` to fetch the path to the current file.
-* It extracts the active page name by stripping parent directories (finding the substring after the last `/`).
-* It compares this filename (e.g., `concepts.html`) with the `href` attribute of each navigation link.
-* When a match is found, it injects the `.active` class into the link, prompting the CSS to render the colorful, glowing underline indicator.
+This page explains important blockchain concepts using comparison cards.
 
-### 2. Client-Side Input Validation
-All forms across the site implement basic client-side validation before running calculations or network calls to ensure zero silent errors:
-* **Live Prices Search**: Prevents submission if the coin search field is empty or contains non-alphanumeric characters (such as spaces or symbols), which would crash the CoinGecko fetch call.
-* **Block Simulator**: Validates that block data is non-empty and that the nonce is a valid, positive integer. If validation fails, input borders flash red and a visible inline error message appears.
+Topics covered:
 
-### 3. Cryptographic SHA-256 Hashing (`simulator.js`)
-Instead of using a mock hash or relying on a large external library, Page 4 employs the **native Web Crypto API** built into modern web browsers:
-* The async function `crypto.subtle.digest('SHA-256', msgBuffer)` calculates the true SHA-256 hash.
-* `TextEncoder` translates plain text characters into a binary stream before hashing.
-* The output binary buffer is then converted into a human-readable 64-character hexadecimal signature.
+* Web2 vs Web3
+* Bitcoin vs Ethereum
+* Public Key vs Private Key
+* Blockchain vs Traditional Database
 
-### 4. The Chain-Breaking Effect (Blockchain Immutability)
-The simulator illustrates why blockchain data is tamper-proof:
-* Block 2's `Previous Hash` field is dynamically bound to Block 1's computed current Hash.
-* When Block 1's data is edited, its hash changes instantly (referred to as the *avalanche effect*).
-* Since Block 1's hash updates, the input values to Block 2's hash formula automatically change.
-* As a result, Block 2's computed hash updates and fails to meet the required difficulty criteria (starts with `00`), triggering the status badge to switch to **"❌ Block Invalid"** and highlighting the card in red.
-* To restore the blockchain, the user is forced to re-mine Block 1, followed by re-mining Block 2.
+## 3. Live Prices
 
----
+This page displays live cryptocurrency prices.
 
-## ✏️ Placeholders to Fill
+Features:
 
-In the footer of all four HTML files, locate the developer credits block:
-* Replace `[YOUR NAME]` with your full name.
-* Replace `[YOUR GITHUB URL]` with the web address of your GitHub profile.
-* Replace `[YOUR BATCH NAME]` with your course or batch identifier.
+* Bitcoin (BTC) Price
+* Ethereum (ETH) Price
+* Current USD Price
+* 24-Hour Price Change
+* Refresh Button
+* CoinGecko API Integration
+
+## 4. Blockchain Simulator
+
+This page demonstrates how blockchain works.
+
+Features:
+
+* Enter block data
+* Generate SHA-256 hash
+* Mine block using Proof of Work
+* Nonce calculation
+* Block validation
+* Blockchain integrity demonstration
+  
+# How to Run
+
+1. Clone the repository.
+git clone https://github.com/PrekshaDesai/ChainIntro.git
+
+2. Open the project folder.
+
+3. Open **index.html** in your web browser.
+Alternatively, you can use the VS Code Live Server extension.
+
+An internet connection is required to load Google Fonts and fetch live cryptocurrency prices.
+
+# How It Works
+
+### Navigation
+
+* A shared navigation bar is available on every page.
+* The current page is automatically highlighted using JavaScript.
+
+### Live Cryptocurrency Prices
+
+* Retrieves real-time Bitcoin and Ethereum prices from the CoinGecko API.
+* Displays the current price and 24-hour price change.
+* Includes a refresh button to update the data.
+
+### Blockchain Simulator
+
+* Uses the browser's Web Crypto API to generate SHA-256 hashes.
+* Simulates Proof-of-Work mining by calculating a valid hash.
+* Demonstrates blockchain immutability by showing how changing one block affects the next block.
+
+# Learning Objectives
+
+This project helps users understand:
+
+* Web3
+* Blockchain
+* Cryptocurrency
+* Bitcoin
+* Ethereum
+* SHA-256 Hashing
+* Nonce
+* Proof of Work
+* Blockchain Immutability
+* Public and Private Keys
+
+# Future Improvements
+
+* Add support for more cryptocurrencies
+* Add cryptocurrency search
+* Display price charts
+* Dark mode
+* Wallet integration
+* Enhanced mining animations
+* More blockchain learning modules
+
+# Author
+
+Name: Preksha Desai 
+
+GitHub: https://github.com/PrekshaDesai
+
+Batch: 2024-2028
+
+# License
+
+This project was developed for educational purposes as part of a Web3 learning assignment.
